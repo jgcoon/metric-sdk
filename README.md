@@ -6,7 +6,7 @@ SDK to measure application or code level metrics for projects based on Spring Fr
 
 		metric.basic.path	: basic metric key
 		cf. structure of metric key is as follows: (basic metric path).metric.(metric key)
-		metric.tx.mode		: metric data tx mode, (http, kafka)
+		metric.tx.mode	: metric data tx mode, (http, kafka)
 		metric.http.host	: for http tx mode, http host url
 		metric.kafka.host	: for kafka tx mode, kafka host
 		metric.kafka.topic	: for kafka tx mode, kafka topic
@@ -14,7 +14,7 @@ SDK to measure application or code level metrics for projects based on Spring Fr
 
 		metric.thread.max		: Maximum thread pool size for metric processin (default: 20)
 		metric.thread.min		: Minimum thread pool size for metric processing (default: 10)
-		metric.thread.alivetime		: Thead alive time for non-running threads (default: 20000 ms)
+		metric.thread.alivetime	: Thead alive time for non-running threads (default: 20000 ms)
 		metric.window.time		: window time for first-step reducing (default: 10 sec)
 		metric.latency.percentile	: precentile values for latency metrics	(default: 50,90,95,99,100)
 		metric.latency.range		: categorized range values for for latency metrics	(default: 50,100,150,200,250,300 ms)
