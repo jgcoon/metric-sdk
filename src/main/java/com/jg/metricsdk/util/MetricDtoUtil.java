@@ -1,8 +1,8 @@
 package com.jg.metricsdk.util;
 
-public class KafkaDtoUtil {
+public class MetricDtoUtil {
 
-	private static final String keyFormat = "metric.%s";
+	private static final String keyFormat = "%s.metric.%s";
 
 	public static String getFullKey(String metricHostName, String metricKey) {
 		return String.format(keyFormat, metricHostName, metricKey);

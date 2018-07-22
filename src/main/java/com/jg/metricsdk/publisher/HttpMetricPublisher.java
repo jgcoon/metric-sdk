@@ -5,8 +5,8 @@ import com.jg.metricsdk.model.HttpDto;
 import com.jg.metricsdk.model.MetricType;
 import com.jg.metricsdk.model.MetricUnit;
 import com.jg.metricsdk.service.LatencyMetricHandler;
-import com.jg.metricsdk.util.KafkaDtoUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jg.metricsdk.util.MetricDtoUtil;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +28,8 @@ public class HttpMetricPublisher implements Consumer<MetricUnit> {
 	private MetricSchedFactory metricSchedFactory;
 	private LatencyMetricHandler latencyMetricHandler;
 
+	private static final String keyFormat = "%s.metric.%s";
+
 	public HttpMetricPublisher(String httpHost, String metricBasicPath, MetricSchedFactory metricSchedFactory, LatencyMetricHandler latencyMetricHandler) {
 
 		this.httpHost = httpHost;
@@ -43,7 +45,7 @@ public class HttpMetricPublisher implements Consumer<MetricUnit> {
 		Observable.just(metricUnit)
 			.map(unit -> {
 				List<HttpDto> grafanaDtos = Lists.newArrayList();
-				String fullKey = KafkaDtoUtil.getFullKey(metricBasicPath, unit.getKey());
+				String fullKey = MetricDtoUtil.getFullKey(metricBasicPath, unit.getKey());
 
 				if (unit.getType() == MetricType.COUNT) {
 					grafanaDtos = Lists.newArrayList(new HttpDto(fullKey, unit.getValue().get(0), System.currentTimeMillis()));
