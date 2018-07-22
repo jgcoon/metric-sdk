@@ -1,0 +1,54 @@
+group 'com.jg.metricsdk'
+version '1.0.0.RELEASE'
+
+apply plugin: 'java'
+def jarName = 'metricsdk'
+
+sourceCompatibility = 1.8
+
+jar {
+    baseName "${jarName}"
+}
+
+compileJava {
+    options.compilerArgs << '-parameters'
+    options.fork = true
+    options.forkOptions.executable = 'javac'
+}
+
+tasks.withType(JavaCompile) {
+    options.fork = true
+    options.forkOptions.jvmArgs += ["-parameters"]
+}
+
+tasks.withType(JavaCompile) {
+    options.fork = true
+    options.compilerArgs += ["-parameters"]
+}
+
+repositories {
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+}
+
+buildscript {
+    repositories {
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+}
+
+dependencies {
+    compileOnly "org.projectlombok:lombok:1.16.16"
+    compileOnly 'org.springframework:spring-context:4.1.6.RELEASE'
+    compileOnly 'org.assertj:assertj-core:2.6.0'
+    compileOnly 'org.apache.commons:commons-lang3:3.6'
+    compileOnly 'org.apache.commons:commons-collections4:4.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.7'
+    compile "io.reactivex:rxjava:1.3.8"
+    compileOnly 'com.google.code.gson:gson:2.8.4'
+    compileOnly "org.aspectj:aspectjrt:1.8.10"
+    compileOnly group: 'org.apache.kafka', name: 'kafka-clients', version: '0.10.0.0'
+    compileOnly group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.0'
+    compileOnly group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.0'
+}
